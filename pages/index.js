@@ -2,6 +2,15 @@ import Head from "next/head";
 import { useState } from "react";
 import styles from "./index.module.css";
 
+const fs = require ("fs");
+const pdf = require ("pdf-parse");
+
+let dataBuffer = fs.readFileSync ("THINK 66 - Final Project Abstract.pdf");
+pdf(dataBuffer).then(function(data){
+  console.log(data.text);
+})
+
+
 export default function Home() {
   const [animalInput, setAnimalInput] = useState("");
   const [result, setResult] = useState();
@@ -50,6 +59,7 @@ export default function Home() {
             value={animalInput}
             onChange={(e) => setAnimalInput(e.target.value)}
           />
+
           <input type="submit" value="Generate names" />
         </form>
         <div className={styles.result}>{result}</div>
