@@ -8,12 +8,21 @@
     "start": "next start"
   },
   "dependencies": {
+    "fs": "^0.0.1-security",
     "next": "^13.1.1",
     "openai": "^3.1.0",
+    "pdf-parse": "^1.1.1",
+    "pdfjs-dist": "^3.3.122",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-pdf": "^6.2.2"
   },
   "engines": {
     "node": ">=14.6.0"
+  },
+  "browser": {
+    "fs": false,
+    "os": false,
+    "path": false
   }
 }

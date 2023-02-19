@@ -15,8 +15,8 @@ export default async function (req, res) {
     return;
   }
 
-  const animal = req.body.animal || '';
-  if (animal.trim().length === 0) {
+  const card = req.body.card || '';
+  if (card.trim().length === 0) {
     res.status(400).json({
       error: {
         message: "Please enter a valid animal",
@@ -28,7 +28,7 @@ export default async function (req, res) {
   try {
     const completion = await openai.createCompletion({
       model: "text-davinci-003",
-      prompt: generatePrompt(animal),
+      prompt: generatePrompt(card),
       temperature: 0.6,
       max_tokens: 3000,
     });

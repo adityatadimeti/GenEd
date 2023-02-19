@@ -2,8 +2,9 @@ import Head from "next/head";
 import { useState } from "react";
 import styles from "./index.module.css";
 
+
 export default function Home() {
-  const [animalInput, setAnimalInput] = useState("");
+  const [cardInput, setCardInput] = useState("");
   const [story, setStory] = useState("");
 
   async function onSubmit(event) {
@@ -14,7 +15,7 @@ export default function Home() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ animal: animalInput }),
+        body: JSON.stringify({ card: cardInput }),
       });
 
       const data = await response.json();
@@ -24,7 +25,7 @@ export default function Home() {
       }
 
       setStory(data.result);
-      setAnimalInput("");
+      setCardInput("");
     } catch (error) {
       // Consider implementing your own error handling logic here
       console.error(error);
@@ -64,9 +65,10 @@ export default function Home() {
             name="animal"
             wrap="soft"
             placeholder="Enter your input"
-            value={animalInput}
-            onChange={(e) => setAnimalInput(e.target.value)}
+            value={cardInput}
+            onChange={(e) => setCardInput(e.target.value)}
           />
+
           <input type="submit" value="Generate flashcards" />
         </form>
         <div className={styles.result}>

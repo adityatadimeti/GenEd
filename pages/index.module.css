@@ -65,3 +65,13 @@
   font-weight: bold;
   margin-top: 40px;
 }
+
+.main .error-msg {
+  width: 100%;
+  color: Red;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+
+
