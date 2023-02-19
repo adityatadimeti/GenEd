@@ -32,10 +32,21 @@ export default function Home() {
     }
   }
 
+
+  function downloadCsv() {
+    const csvContent = "data:text/csv;charset=utf-8," + story.replaceAll("\n", ",");
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "flashcards.csv");
+    document.body.appendChild(link);
+    link.click();
+  }
+
   return (
     <div>
       <Head>
-        <title>OpenAI Quickstart</title>
+        <title>GenEd</title>
 
       </Head>
 
@@ -56,13 +67,22 @@ export default function Home() {
         <div className={styles.result}>
           {story.length > 0 ? (
             <>
+              <button onClick={downloadCsv}>Download CSV</button>
               <h4>Generated flashcards</h4>
-              {story.split('\n').map((line, index) => (
+              {story.split("\n").map((line, index) => (
                 <p key={index}>{line}</p>
               ))}
+              
             </>
           ) : null}
         </div>
+
+        
+
+
+
+
+
       </main>
     </div>
   );
