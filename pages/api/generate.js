@@ -30,8 +30,10 @@ export default async function (req, res) {
       model: "text-davinci-003",
       prompt: generatePrompt(animal),
       temperature: 0.6,
+      max_tokens: 3000,
     });
-    res.status(200).json({ result: completion.data.choices[0].text });
+    console.log('output: ' + completion.data.choices[0].text)
+    res.status(200).json({ result: completion.data.choices[0].text, text_completion: completion.data });
   } catch(error) {
     // Consider adjusting the error handling logic for your use case
     if (error.response) {
@@ -50,7 +52,7 @@ export default async function (req, res) {
 
 function generatePrompt(input) {
   
-  return `Generate a set of 10 educational flashcards with questions and answers based on content solely from the input text. The intended audience is high school students.
+  return `Generate 10 educational flashcards with questions and answers based on content solely from the input text. Do not include information not explicitly included in the input. The intended audience is high school students.
    The flashcards should cover the key concepts and information in the input text in a concise and easy-to-understand manner. Here are two example flashcards:
 
   Front: What is the function of the mitochondria?
@@ -61,3 +63,5 @@ function generatePrompt(input) {
   
   The input text is: ${input}.`;
 }
+
+
