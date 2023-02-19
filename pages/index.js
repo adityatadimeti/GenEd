@@ -45,7 +45,7 @@ export default function Home() {
           <textarea
             type="text"
             name="animal"
-            placeholder="Enter an animal"
+            placeholder="Enter input"
             value={animalInput}
             onChange={(e) => setAnimalInput(e.target.value)}
           />
