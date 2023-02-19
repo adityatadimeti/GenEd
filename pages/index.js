@@ -62,7 +62,7 @@ export default function Home() {
         <form onSubmit={onSubmit}>
           <textarea
             type="text"
-            name="animal"
+            name="input"
             wrap="soft"
             placeholder="Enter your input"
             value={cardInput}
