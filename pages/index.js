@@ -42,9 +42,10 @@ export default function Home() {
         <img src="/dog.png" className={styles.icon} />
         <h3>Name my pet</h3>
         <form onSubmit={onSubmit}>
-          <input
+          <textarea
             type="text"
             name="animal"
+            wrap = "soft"
             placeholder="Enter an animal"
             value={animalInput}
             onChange={(e) => setAnimalInput(e.target.value)}
