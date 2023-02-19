@@ -49,8 +49,6 @@ export default async function (req, res) {
 }
 
 function generatePrompt(input) {
-  // const capitalizedAnimal =
-  //   animal[0].toUpperCase() + animal.slice(1).toLowerCase();
   
   return `Generate a set of 10 educational flashcards with questions and answers based on content solely from the input text. The intended audience is high school students.
    The flashcards should cover the key concepts and information in the input text in a concise and easy-to-understand manner. Here are two example flashcards:
