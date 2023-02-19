@@ -2,18 +2,10 @@ import Head from "next/head";
 import { useState } from "react";
 import styles from "./index.module.css";
 
-const fs = require ("fs");
-const pdf = require ("pdf-parse");
-
-let dataBuffer = fs.readFileSync ("THINK 66 - Final Project Abstract.pdf");
-pdf(dataBuffer).then(function(data){
-  console.log(data.text);
-})
-
 
 export default function Home() {
-  const [animalInput, setAnimalInput] = useState("");
-  const [result, setResult] = useState();
+  const [cardInput, setCardInput] = useState("");
+  const [story, setStory] = useState("");
 
   async function onSubmit(event) {
     event.preventDefault();
@@ -23,46 +15,57 @@ export default function Home() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ animal: animalInput }),
+        body: JSON.stringify({ card: cardInput }),
       });
 
       const data = await response.json();
+      console.log(data);
       if (response.status !== 200) {
         throw data.error || new Error(`Request failed with status ${response.status}`);
       }
 
-      setResult(data.result);
-      setAnimalInput("");
-    } catch(error) {
+      setStory(data.result);
+      setCardInput("");
+    } catch (error) {
       // Consider implementing your own error handling logic here
       console.error(error);
       alert(error.message);
     }
   }
 
+
   return (
     <div>
       <Head>
         <title>OpenAI Quickstart</title>
-        <link rel="icon" href="/dog.png" />
+
       </Head>
 
       <main className={styles.main}>
-        <img src="/dog.png" className={styles.icon} />
-        <h3>Name my pet</h3>
+
+        <h3>Create flashcards from an input</h3>
         <form onSubmit={onSubmit}>
           <textarea
             type="text"
             name="animal"
-            wrap = "soft"
-            placeholder="Enter an animal"
-            value={animalInput}
-            onChange={(e) => setAnimalInput(e.target.value)}
+            wrap="soft"
+            placeholder="Enter your input"
+            value={cardInput}
+            onChange={(e) => setCardInput(e.target.value)}
           />
 
-          <input type="submit" value="Generate names" />
+          <input type="submit" value="Generate flashcards" />
         </form>
-        <div className={styles.result}>{result}</div>
+        <div className={styles.result}>
+          {story.length > 0 ? (
+            <>
+              <h4>Generated flashcards</h4>
+              {story.split('\n').map((line, index) => (
+                <p key={index}>{line}</p>
+              ))}
+            </>
+          ) : null}
+        </div>
       </main>
     </div>
   );
