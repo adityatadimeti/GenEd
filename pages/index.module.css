@@ -14,7 +14,7 @@
   font-style: normal;
 }
 .main,
-.main input {
+.main textarea {
   font-size: 16px;
   line-height: 24px;
   color: #353740;
